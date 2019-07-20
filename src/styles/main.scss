@@ -1,0 +1,222 @@
+%stretch {
+  height: 100%;
+  width: 100%;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+#root {
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+
+  > .wrapper {
+    overflow-x: hidden;
+  }
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background: orangered;
+  border: 1px solid red;
+  border-radius: 10px;
+
+  &.disabled {
+    background: white;
+  }
+}
+
+#header {
+  position: relative;
+  height: 150px;
+  background: greenyellow;
+
+  &.hidden {
+    height: 0;
+  }
+
+  .toggle {
+    position: absolute;
+    z-index: 1;
+    bottom: -20px;
+  }
+}
+
+#footer {
+  @extend .inline;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+}
+
+#body {
+  > #nav {
+    position: relative;
+    height: 100px;
+    background: rgb(205, 151, 255);
+  }
+  // почему-то props стилей по умолчанию не принимаются в react-swipe
+  > .react-swipe-container {
+    > div > div {
+      float: left;
+      position: relative;
+
+      .bar {
+        @extend .inline;
+        width: 100%;
+        align-items: center;
+        position: relative;
+        height: 100px;
+        background: yellow;
+      }
+
+      .wrapper {
+        position: relative;
+        @extend %stretch;
+        overflow: hidden;
+      }
+
+      > .pagination {
+        @extend .inline;
+        list-style-type: none;
+        > li {
+          margin: 0 15px;
+          
+        }
+      }
+
+      #words-container {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: column;
+        width: 100%;
+
+        .word {  
+          align-items: center;       
+          display: flex;
+          height: 40px;
+          width: 500px;
+          padding: 0 40px;
+          border-right: 2px solid red;
+
+          > div, > input {
+            width: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            transition: flex 0.4s ease;
+          }
+
+          > input {
+            height: 15px;
+          }
+        }
+      }
+
+      #tape-container {
+        width: 100%;
+
+        #tape {
+          position: relative;
+          width: 100%;
+          height: 300px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+
+    #selection {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .card-wrapper {
+      position: absolute;
+      transition: transform 500ms, left 500ms, opacity 500ms;
+
+      margin: 10px 0;
+      min-width: 300px;
+      min-height: 100px;
+
+      &.shake {
+      animation: shake 150ms infinite ease-in-out alternate;
+
+        @keyframes shake {
+          from {transform: rotate(1deg);}
+          to {transform: rotate(-1deg);}
+        }
+      }
+
+      .card {
+        @extend %stretch;
+        position: absolute;
+        transition: transform 500ms;
+        transform-origin: center;
+        transform-style: preserve-3d;        
+
+        &.flip {
+          transform: rotateX(180deg);
+        }   
+        
+        &.wrong {
+          .back {
+            background: rgb(230, 104, 21);
+          }
+        }
+
+        &.correct {
+          .back {
+            background: rgb(21, 230, 160);
+          }
+        }
+
+        &.removed {
+          > div {
+            background: rgb(216, 216, 216);
+          }
+        }
+
+        .front,
+        .back {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          backface-visibility: hidden;
+
+          @extend %stretch;
+
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          border-radius: 5px;          
+        }
+
+        .front {
+          background: peru;
+          z-index: 2;
+        }
+
+        .back {
+          background: rgb(17, 250, 250);
+          transform: rotateX(180deg);          
+        }
+
+      }
+    }
+  }
+}
