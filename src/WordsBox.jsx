@@ -17,7 +17,7 @@ export default class WordsBox extends React.Component {
             activeParts: { en: true, tr: true, ru: true },
         };
 
-        this.numberPerPage = 10;
+        this.numberPerPage = 20;
     }
 
     toggleWordsPart(part) {
@@ -64,15 +64,15 @@ export default class WordsBox extends React.Component {
         return <div className="bar">
             {
                 isCheckBoxesOpened ?
-                    <div className="inline">
-                        <Button onClick={() => this.completeSelection(true)}>Confirm</Button>
+                    <div className="bundle">
+                        <Button onClick={() => this.completeSelection(true)}>Done</Button>
                         <Button onClick={() => this.completeSelection(false)}>Cancel</Button>
                     </div> :
                     <div>
                         <Button onClick={() => this.switchWordsSelectable(true)}>Edit</Button>
                     </div>
             }
-            <div className="toggle-words-parts inline">
+            <div className="bundle">
                 <Button disabled={!activeParts.en} onClick={() => this.toggleWordsPart("en")}>EN</Button>
                 <Button disabled={!activeParts.tr} onClick={() => this.toggleWordsPart("tr")}>TR</Button>
                 <Button disabled={!activeParts.ru} onClick={() => this.toggleWordsPart("ru")}>RU</Button>
@@ -85,7 +85,7 @@ export default class WordsBox extends React.Component {
         const { isCheckBoxesOpened, activeParts } = this.state;
 
         return (
-            <div className="wrapper">
+            <div>
                 {this.getControlBar()}
                 <div id="words-container" >
                     {

@@ -1,6 +1,4 @@
 import React from 'react';
-// import Image from "./svg/burger.svg";
-
 import Header from "./Header.jsx";
 import ContentController from "./ContentController.jsx";
 

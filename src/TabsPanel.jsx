@@ -22,16 +22,14 @@ export default class TabsPanel extends React.Component {
     }
 
     render() {
-        const r = this.props.reactSwipeEl;
-        const num = r ? r.getNumSlides() : 0;
+        // const r = this.props.reactSwipeEl;
+        // const num = r ? r.getNumSlides() : 0;
         const pos = this.state.pos;
 
-        return <div id="nav" className="inline">
-            <Button disabled={pos === 0} onClick={() => this.handleSwitch("prev")}>Prev</Button>
-            <Button disabled={pos === 0} onClick={() => this.handleSwitch(0)}>1</Button>
-            <Button disabled={pos === 1} onClick={() => this.handleSwitch(1)}>2</Button>
-            <Button disabled={pos === 2} onClick={() => this.handleSwitch(2)}>3</Button>
-            <Button disabled={pos === num - 1} onClick={() => this.handleSwitch("next")}>Next</Button>
+        return <div id="nav">
+            <Button active={pos === 0} onClick={() => this.handleSwitch(0)}>Selection</Button>
+            <Button active={pos === 1} onClick={() => this.handleSwitch(1)}>Learning</Button>
+            <Button active={pos === 2} onClick={() => this.handleSwitch(2)}>Check</Button>
         </div>;
     }
 }

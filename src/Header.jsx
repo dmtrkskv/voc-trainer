@@ -1,5 +1,8 @@
 import React from "react";
 import Button from "./Button.jsx";
+import MoonSVG from "./svg/moon.svg";
+import VerticalResizeSVG from "./svg/vertical-resize.svg";
+
 
 export default class Header extends React.Component {
     constructor(props) {
@@ -13,15 +16,16 @@ export default class Header extends React.Component {
 
     render() {
         let className = "";
-        this.state.hidden && (className = "hidden");
+        let arrowClass = "toggle";
+
+        if (this.state.hidden) {
+            className = "hidden";
+            arrowClass += " active";
+        }
 
         return <div id="header" className={className}>
-            <Button onClick={this.toggle} className="toggle">
-                toggle
-            </Button>
-            <Button onClick={this.props.toggleTheme} >
-                Toggle Theme
-            </Button>
+            <VerticalResizeSVG onClick={this.toggle} className={arrowClass} />
+            <MoonSVG onClick={this.props.toggleTheme} />
         </div>
     }
 }

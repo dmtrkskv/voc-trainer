@@ -4,13 +4,18 @@ export default function Word(props) {
     let { word, isCheckBoxesOpened, checked, activeParts, handleClick } = props;
 
     let className = "word";
-    isCheckBoxesOpened && (className += " selectable");
+    if (isCheckBoxesOpened) {
+        className += " selectable";
+        if (checked) {
+            className += " checked";
+        }
+    }
 
     const parts = Object.entries(activeParts);
     return <div className={className} onClick={handleClick}>
         <input
             readOnly
-            style={getFlexStyle(isCheckBoxesOpened)}
+            style={getFlexStyle(isCheckBoxesOpened, .5)}
             type="checkbox"
             checked={checked} />
         {
@@ -21,7 +26,7 @@ export default function Word(props) {
         }
     </div>;
 
-    function getFlexStyle(state) {
-        return state === true ? { flexGrow: "1" } : { flexGrow: "0" };
+    function getFlexStyle(state, def = 1) {
+        return state === true ? { flexGrow: def } : { flexGrow: "0" };
     }
 }

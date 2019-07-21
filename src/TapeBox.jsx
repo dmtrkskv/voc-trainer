@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card.jsx";
 import Button from "./Button.jsx";
+import Empty from "./Empty.jsx";
 
 export default class TapeBox extends React.Component {
     constructor(props) {
@@ -84,21 +85,23 @@ export default class TapeBox extends React.Component {
 
         if (this.state.inputMode === inp.write) {
 
-            return <div className="inline">
-                <input
-                    type="text"
-                    ref={this.inputRef}
-                    autoFocus={true}
-                    value={this.state.inputValue}
-                    onChange={this.validateInput} />
-                <Button
-                    disabled={fl}
-                    onClick={() => {
-                        this.flipCurCard(false);
-                        this.inputRef.current.focus();
-                    }} >
-                    Decline
+            return <div className="confirm">
+                <div className="bundle">
+                    <input
+                        type="text"
+                        ref={this.inputRef}
+                        autoFocus={true}
+                        value={this.state.inputValue}
+                        onChange={this.validateInput} />
+                    <Button
+                        disabled={fl}
+                        onClick={() => {
+                            this.flipCurCard(false);
+                            this.inputRef.current.focus();
+                        }} >
+                        Decline
                 </Button>
+                </div>
                 <Button
                     disabled={!fl}
                     onClick={this.setNext}>
@@ -107,17 +110,19 @@ export default class TapeBox extends React.Component {
             </div>;
         } else if (this.state.inputMode === inp.affirm) {
 
-            return <div className="inline">
-                <Button
-                    disabled={fl}
-                    onClick={() => this.flipCurCard(true)}>
-                    Remember
+            return <div className="confirm">
+                <div className="bundle">
+                    <Button
+                        disabled={fl}
+                        onClick={() => this.flipCurCard(true)}>
+                        Remember
                     </Button>
-                <Button
-                    disabled={fl}
-                    onClick={() => this.flipCurCard(false)}>
-                    Forgot
+                    <Button
+                        disabled={fl}
+                        onClick={() => this.flipCurCard(false)}>
+                        Forgot
                     </Button>
+                </div>
                 <Button
                     disabled={!fl}
                     onClick={this.setNext}>
@@ -182,15 +187,16 @@ export default class TapeBox extends React.Component {
             <Button
                 disabled={activeIndex === 0 && !isActiveCardFlipped}
                 onClick={this.reset}>Reset</Button>
-            <Button>Exchange</Button>
-            <Button>Sort</Button>
+            <Button disabled={this.props.sortedKeys.length === 0}>Shuffle sides</Button>
 
-            <Button
-                disabled={inputMode !== inp.write}
-                onClick={() => this.switchInputMode(inp.write)}>Write</Button>
-            <Button
-                disabled={inputMode !== inp.affirm}
-                onClick={() => this.switchInputMode(inp.affirm)}>Affirm</Button>
+            <div className="bundle">
+                <Button
+                    active={inputMode === inp.write}
+                    onClick={() => this.switchInputMode(inp.write)}>Write</Button>
+                <Button
+                    active={inputMode === inp.affirm}
+                    onClick={() => this.switchInputMode(inp.affirm)}>Affirm</Button>
+            </div>
         </div>;
     }
 
@@ -198,21 +204,21 @@ export default class TapeBox extends React.Component {
         const { activeIndex } = this.state;
 
         if (this.props.sortedKeys.length === 0) {
-            return <div className="wrapper">
+            return <div>
                 {this.getControlBar()}
-                <div>Пусто</div>
+                <Empty />
             </div>;
         }
 
         if (activeIndex > this.props.sortedKeys.length - 1) {
-            return <div className="wrapper">
+            return <div>
                 {this.getControlBar()}
                 <div>Ваш результат</div>
             </div>;
         }
 
         return <div>
-            <div className="wrapper">
+            <div>
                 {this.getControlBar()}
                 <div id="tape-container">
                     <div id="tape">

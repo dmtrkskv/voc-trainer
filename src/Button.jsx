@@ -4,7 +4,7 @@ export default class Button extends React.Component {
     constructor(props) {
         super(props);
 
-        let defStyle = { width: "100px", height: "50px" };
+        let defStyle = {};
 
         let { className, style } = this.props;
         if (className) {

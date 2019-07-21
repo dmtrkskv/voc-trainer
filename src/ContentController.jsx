@@ -165,7 +165,7 @@ export default class ContentController extends React.Component {
             pageWords, selectedWords, selectedWordsBuffer
         );
 
-        return <div id="body">
+        return <div id="main">
             <TabsPanel defaultPos={0} reactSwipeEl={this.reactSwipeEl} />
             <ReactSwipe
                 swipeOptions={{ continuous: false }}

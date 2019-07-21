@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card.jsx";
 import Button from "./Button.jsx";
+import Empty from "./Empty.jsx";
 
 // как назвать?
 export default class CardsBox extends React.Component {
@@ -89,23 +90,27 @@ export default class CardsBox extends React.Component {
         //     .find(item => item !== defaultSide) === undefined;
 
         return <div className="bar">
-            <Button
-                active={defaultSide === true}
-                onClick={() => this.resetSides(true)}>ResetRu</Button>
-            <Button
-                active={defaultSide === false}
-                onClick={() => this.resetSides(false)}>ResetEn</Button>
-            <Button
-                active={sortMode === "en"}
-                onClick={() => this.props.sort("en")}>Sort En</Button>
-            <Button
-                active={sortMode === "ru"}
-                onClick={() => this.props.sort("ru")}>Sort Ru</Button>
-            <Button
-                active={sortMode === "random"}
-                onClick={() => this.props.sort("random")}>Shuffle</Button>
+            <div className="bundle">
+                <Button
+                    active={defaultSide === true}
+                    onClick={() => this.resetSides(true)}>ResetRu</Button>
+                <Button
+                    active={defaultSide === false}
+                    onClick={() => this.resetSides(false)}>ResetEn</Button>
+            </div>
+            <div className="bundle">
+                <Button
+                    active={sortMode === "en"}
+                    onClick={() => this.props.sort("en")}>Sort En</Button>
+                <Button
+                    active={sortMode === "ru"}
+                    onClick={() => this.props.sort("ru")}>Sort Ru</Button>
+                <Button
+                    active={sortMode === "random"}
+                    onClick={() => this.props.sort("random")}>Shuffle</Button>
+            </div>
             {removeMode ?
-                <div className="inline">
+                <div className="bundle">
                     <Button onClick={this.removeCards}>Confirm</Button>
                     <Button onClick={this.toggleRemoveMode}>Cancel</Button>
                 </div> :
@@ -119,15 +124,15 @@ export default class CardsBox extends React.Component {
         const { sides, removeMode, removedKeysBuffer } = this.state;
 
         if (sortedKeys.length === 0) {
-            return <div className="wrapper">
+            return <div>
                 {this.getControlBar()}
-                <div>Пусто</div>
+                <Empty />
             </div>;
         }
 
         return <div>
 
-            <div className="wrapper">
+            <div>
                 {this.getControlBar()}
                 <div id="selection">
                     {
