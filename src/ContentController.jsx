@@ -43,22 +43,24 @@ export default class ContentController extends React.Component {
         this.setState({ pageWords: Object.fromEntries(arr) });
     }
 
-    sortSelectedWords = words => {
-        const sortMode = this.state.selectedWordsSortMode;
-        let sE = Object.entries(words);
+    sortSelectedWords = (mode, words) => {
+        const sortMode = mode || this.state.selectedWordsSortMode;
+        const selectedWords = words || this.state.selectedWords;
+
+        let sE = Object.entries(selectedWords);
 
         if (sortMode === "random") {
             sE.sort(compareRandom);
         } else if (sortMode === "en" || sortMode === "ru") {
             sE.sort((a, b) => compare(a, b, sortMode));
         } else {
-            return;
+            throw new Error("unknown sort mode");
         }
 
         const sortedKeys = sE.map(item => item[0]);
 
         this.setState({
-            selectedWordsSortMode: sortMode, // wtf?
+            selectedWordsSortMode: sortMode,
             selectedWordsSortedKeys: sortedKeys
         });
 
@@ -119,7 +121,7 @@ export default class ContentController extends React.Component {
         }
 
         this.clearSelectedWordsBuffer();
-        this.sortSelectedWords(s1);
+        this.sortSelectedWords(null, s1);
         this.setState({ selectedWords: s1 });
     }
 
@@ -141,9 +143,27 @@ export default class ContentController extends React.Component {
         this.setState({ selectedWordsBuffer: {} });
     }
 
+    removeSelectedWordsByKeys = keys => {
+        let s = clone(this.state.selectedWords);
+        keys.forEach(key => {
+            delete s[key];
+        });
+
+        this.sortSelectedWords(null, s);
+        this.setState({ selectedWords: s });
+    }
+
     render() {
-        const { pageWords, selectedWords, selectedWordsBuffer, selectedWordsSortedKeys } = this.state;
-        const pageWordsWithSelection = this.updateObjectByMerging(pageWords, selectedWords, selectedWordsBuffer);
+        const {
+            pageWords,
+            selectedWords,
+            selectedWordsBuffer,
+            selectedWordsSortedKeys,
+            selectedWordsSortMode } = this.state;
+
+        const pageWordsWithSelection = this.updateObjectByMerging(
+            pageWords, selectedWords, selectedWordsBuffer
+        );
 
         return <div id="body">
             <TabsPanel defaultPos={0} reactSwipeEl={this.reactSwipeEl} />
@@ -161,6 +181,9 @@ export default class ContentController extends React.Component {
                 <CardsBox
                     words={selectedWords}
                     sortedKeys={selectedWordsSortedKeys}
+                    removeCards={this.removeSelectedWordsByKeys}
+                    sort={this.sortSelectedWords}
+                    sortMode={selectedWordsSortMode}
                 />
 
                 <TapeBox

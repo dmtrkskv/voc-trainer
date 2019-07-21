@@ -1,15 +1,18 @@
 import React from "react";
 
 export default function Word(props) {
-    let { word, isCheckBoxesOpened, defaultChecked, activeParts, onChange } = props;
+    let { word, isCheckBoxesOpened, checked, activeParts, handleClick } = props;
+
+    let className = "word";
+    isCheckBoxesOpened && (className += " selectable");
 
     const parts = Object.entries(activeParts);
-    return <div className="word">
+    return <div className={className} onClick={handleClick}>
         <input
+            readOnly
             style={getFlexStyle(isCheckBoxesOpened)}
-            onChange={onChange}
             type="checkbox"
-            defaultChecked={defaultChecked} />
+            checked={checked} />
         {
             parts.map(item => {
                 const key = item[0], value = item[1];

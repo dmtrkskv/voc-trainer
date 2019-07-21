@@ -17,6 +17,18 @@ body {
   -khtml-user-select: none;
   user-select: none;
 
+  > div {
+    background: white;    
+  }
+
+  > .night {
+    filter: invert(100%);
+
+    .card-wrapper {
+      filter: invert(100%);
+    }
+  }
+
   > .wrapper {
     overflow-x: hidden;
   }
@@ -33,6 +45,10 @@ body {
 
   &.disabled {
     background: white;
+  }
+
+  &.active {
+    background: green;
   }
 }
 
@@ -109,6 +125,12 @@ body {
           width: 500px;
           padding: 0 40px;
           border-right: 2px solid red;
+
+          &.selectable {
+            &:hover {
+              background: lightgreen;
+            }
+          }
 
           > div, > input {
             width: 0;

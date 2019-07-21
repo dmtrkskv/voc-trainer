@@ -56,14 +56,21 @@ export default class CardsBox extends React.Component {
         this.setState({ sides: sides });
     }
 
-    resetSides = () => {
+    resetSides = toSide => {
         let sides = clone(this.state.sides);
 
         for (let key in sides) {
-            sides[key] = this.state.defaultSide;
+            sides[key] = toSide;
         }
 
-        this.setState({ sides: sides });
+        this.setState({ sides: sides, defaultSide: toSide });
+    }
+
+    removeCards = () => {
+        this.props.removeCards(
+            Object.keys(this.state.removedKeysBuffer)
+        );
+        this.toggleRemoveMode();
     }
 
     toggleRemoveMode = () => {
@@ -74,19 +81,36 @@ export default class CardsBox extends React.Component {
     }
 
     getControlBar = () => {
-        const { sortedKeys } = this.props;
-        const { sides, defaultSide } = this.state;
+        const { sortMode } = this.props;
+        const { defaultSide, removeMode } = this.state;
 
-        const isReseted = Object.values(sides)
-            .find(item => item !== defaultSide) === undefined;
+        // const isBoxEmpty = sortedKeys.length === 0;
+        // const isReseted = Object.values(sides)
+        //     .find(item => item !== defaultSide) === undefined;
 
         return <div className="bar">
             <Button
-                disabled={sortedKeys.length === 0 || isReseted}
-                onClick={this.resetSides}>Reset</Button>
-            <Button onClick={null}>Sort</Button>
-            <Button onClick={null}>Shuffle</Button>
-            <Button onClick={this.toggleRemoveMode}>Remove</Button>
+                active={defaultSide === true}
+                onClick={() => this.resetSides(true)}>ResetRu</Button>
+            <Button
+                active={defaultSide === false}
+                onClick={() => this.resetSides(false)}>ResetEn</Button>
+            <Button
+                active={sortMode === "en"}
+                onClick={() => this.props.sort("en")}>Sort En</Button>
+            <Button
+                active={sortMode === "ru"}
+                onClick={() => this.props.sort("ru")}>Sort Ru</Button>
+            <Button
+                active={sortMode === "random"}
+                onClick={() => this.props.sort("random")}>Shuffle</Button>
+            {removeMode ?
+                <div className="inline">
+                    <Button onClick={this.removeCards}>Confirm</Button>
+                    <Button onClick={this.toggleRemoveMode}>Cancel</Button>
+                </div> :
+                <Button onClick={this.toggleRemoveMode}>Remove</Button>
+            }
         </div>;
     }
 

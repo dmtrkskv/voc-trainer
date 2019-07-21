@@ -27,9 +27,10 @@ export default class Button extends React.Component {
 
     render() {
         let { style, className } = this.state;
-        const { children, disabled } = this.props;
+        const { children, disabled, active } = this.props;
         disabled && (className += " disabled");
-        
+        active && (className += " active");
+
         return <div
             onClick={this.handleClick}
             className={className}

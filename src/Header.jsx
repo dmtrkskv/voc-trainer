@@ -4,21 +4,23 @@ import Button from "./Button.jsx";
 export default class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { active: true, className: "" };
-        this.toggle = this.toggle.bind(this);
+        this.state = { hidden: true };
     }
 
-    toggle() {
-        const a = this.state.active;
-        const c = a ? "hidden" : "";
-        this.setState({ active: !a, className: c });
+    toggle = () => {
+        this.setState({ hidden: !this.state.hidden });
     }
 
     render() {
-        let { active, className } = this.state;
+        let className = "";
+        this.state.hidden && (className = "hidden");
+
         return <div id="header" className={className}>
             <Button onClick={this.toggle} className="toggle">
                 toggle
+            </Button>
+            <Button onClick={this.props.toggleTheme} >
+                Toggle Theme
             </Button>
         </div>
     }

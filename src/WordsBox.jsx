@@ -52,11 +52,9 @@ export default class WordsBox extends React.Component {
         ).then(() => { })
     }
 
-    handleMark = (e, key) => {
-        const checked = e.target.checked;
+    handleClickOnWord(key) {
         let word = clone(this.props.pageWords[key]);
-        word.isSelected = checked;
-
+        word.isSelected = !word.isSelected;
         this.props.handleMark(key, word);
     }
 
@@ -94,11 +92,11 @@ export default class WordsBox extends React.Component {
                         Object.entries(pageWords).map(item => {
                             const key = item[0], word = item[1];
                             return <Word
-                                onChange={e => this.handleMark(e, key)}
+                                handleClick={() => this.handleClickOnWord(key)}
                                 key={key}
                                 word={word}
                                 isCheckBoxesOpened={isCheckBoxesOpened}
-                                defaultChecked={word.isSelected}
+                                checked={word.isSelected}
                                 activeParts={activeParts}
                             />
                         })

@@ -11,13 +11,19 @@ import ContentController from "./ContentController.jsx";
 export default class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = { nightTheme: false };
+    }
+
+    toggleTheme = () => {
+        this.setState({ nightTheme: !this.state.nightTheme });
     }
 
     render() {
+        let className = "wrapper";
+        this.state.nightTheme && (className += " night");
         return (
-            <div className="wrapper">
-                <Header />
+            <div className={className}>
+                <Header toggleTheme={this.toggleTheme} />
                 <ContentController />
             </div>
         );
