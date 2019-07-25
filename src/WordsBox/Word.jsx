@@ -1,15 +1,16 @@
 import React from "react";
 
 export default function Word(props) {
-    let { word, isCheckBoxesOpened, checked, activeParts, handleClick } = props;
+    let { word, isCheckBoxesOpened, checked, activeParts, handleClick, head } = props;
 
     let className = "word";
-    if (isCheckBoxesOpened) {
+    if (isCheckBoxesOpened && !head) {
         className += " selectable";
         if (checked) {
             className += " checked";
         }
     }
+    head && (className += " head");
 
     const parts = Object.entries(activeParts);
     return <div className={className} onClick={handleClick}>

@@ -1,41 +1,31 @@
 import React from "react";
 
-export default class Button extends React.Component {
-    constructor(props) {
-        super(props);
+export default function Button(props) {
+    let defStyle = {};
+    const defClassName = "button";
 
-        let defStyle = {};
-
-        let { className, style } = this.props;
-        if (className) {
-            className = " " + className;
-        } else {
-            className = "";
-        }
-
-        this.state = {
-            style: Object.assign(defStyle, style),
-            className: "button " + className
-        }
-        this.handleClick = this.handleClick.bind(this);
+    const handleClick = () => {
+        if (typeof props.onClick !== "function" ||
+            props.disabled) return;
+        props.onClick();
     }
 
-    handleClick() {
-        if (typeof this.props.onClick !== "function") return;
-        this.props.onClick();
-    }
+    const {
+        children, disabled, active, attractive,
+        style: propsStyle, className: propsClassName } = props;
 
-    render() {
-        let { style, className } = this.state;
-        const { children, disabled, active } = this.props;
-        disabled && (className += " disabled");
-        active && (className += " active");
+    let classes = [defClassName, propsClassName];
+    disabled && classes.push("disabled");
+    active && classes.push("active");
+    attractive && classes.push("attractive");
+    const className = classes.join(" ").trim();
 
-        return <div
-            onClick={this.handleClick}
-            className={className}
-            style={style}>
-            {children}
-        </div>
-    }
+    const style = Object.assign(defStyle, propsStyle);
+
+    return <div
+        onClick={handleClick}
+        className={className}
+        style={style}>
+        {children}
+    </div>;
 }

@@ -12,12 +12,15 @@ export default function Card(props) {
         style.animationDelay = Math.floor((Math.random()) * 150) + "ms";
     }
 
-    if (isCorrect === true) {
-        className += " correct";
-    } else if (isCorrect === false) {
-        className += " wrong";
+    let sidesClasses = { front: "front", back: "back" };
+    if (typeof isCorrect === "boolean") {
+        const activeSide = side ? "back" : "front";
+        if (isCorrect === true) {
+            sidesClasses[activeSide] += " correct";
+        } else if (isCorrect === false) {
+            sidesClasses[activeSide] += " wrong";
+        }
     }
-
 
     return <div
         style={style}
@@ -26,8 +29,8 @@ export default function Card(props) {
     >
         <div
             className={className}>
-            <div className="front">{word.en}</div>
-            <div className="back">{word.ru}</div>
+            <div className={sidesClasses.front}>{word.en}</div>
+            <div className={sidesClasses.back}>{word.ru}</div>
         </div>
     </div >;
 }
