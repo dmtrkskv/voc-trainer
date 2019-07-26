@@ -75,7 +75,7 @@ class WordsBox extends React.Component {
     }
 
     render() {
-        const { words } = this.props;
+        const { words, totalWords } = this.props;
         const { isCheckBoxesOpened, activeParts, mode } = this.state;
 
         const wordsNum = Object.keys(words).length;
@@ -89,13 +89,11 @@ class WordsBox extends React.Component {
                     isCheckBoxesOpened={isCheckBoxesOpened}
                     openChecks={() => this.switchWordsSelectable(true)}
                     confirmSelection={() => this.completeSelection(true)}
-                    cancelSelection={() => this.completeSelection(false)}
-                />
-
-                <SubBar
-                    mode={mode}
-                    load={this.load} switchMode={this.switchMode}
-                />
+                    cancelSelection={() => this.completeSelection(false)}>
+                    <SubBar
+                        switchMode={this.switchMode}
+                    />
+                </Bar>
 
                 <Content
                     isCheckBoxesOpened={isCheckBoxesOpened} activeParts={activeParts}
@@ -105,7 +103,7 @@ class WordsBox extends React.Component {
                 {wordsNum >= this.numberPerPage &&
                     <Pagination
                         initialPage={0}
-                        pageCount={10}
+                        pageCount={totalWords / this.numberPerPage}
                         pageRangeDisplayed={3}
                         marginPagesDisplayed={1}
                         containerClassName="pagination"
@@ -120,7 +118,8 @@ class WordsBox extends React.Component {
 
 export default connect(
     store => ({
-        words: store.modifiedItems
+        words: store.modifiedItems,
+        totalWords: store.totalItems
     }),
     dispatch => ({
         getPage: (page, num) => dispatch(downloadPage(page, num)),

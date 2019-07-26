@@ -1,10 +1,17 @@
-const initialState = { items: {}, modifiedItems: {}, selected: {}, selectionBuffer: {} };
+const initialState = {
+    items: {},
+    modifiedItems: {},
+    selected: {},
+    selectionBuffer: {},
+    totalItems: 0,
+    activeTab: 0
+};
 
 export default function wordsReducer(state = initialState, action) {
     const { items, selected, selectionBuffer } = state;
 
     if (action.type === "UPDATE_ITEMS") {
-        return { ...state, items: action.payload };
+        return { ...state, items: action.payload.items, totalItems: action.payload.n };
 
     } else if (action.type === "MODIFY_ITEMS") {
         let modifiedNewItems = {};
@@ -62,6 +69,8 @@ export default function wordsReducer(state = initialState, action) {
             delete s[key];
         });
         return { ...state, selected: s };
+    } else if (action.type === "SWITCH_TAB") {
+        return { ...state, activeTab: action.payload };
     }
     return state;
 }

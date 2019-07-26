@@ -4,6 +4,7 @@ import Search from "./Search.jsx";
 import Button from "../Button.jsx"
 
 import BackspaceArrowSVG from "../svg/backspace-arrow.svg";
+import RefreshSVG from "../svg/refresh.svg";
 
 export default function SubBar(props) {
     const { mode } = props;
@@ -21,17 +22,16 @@ export default function SubBar(props) {
         props.load("search", str);
     }
 
-    if (mode === "default") return <div></div>;
+    if (mode === "default") return <div className="sub" style={{ height: 0 }}></div>;
 
     const exit = <BackspaceArrowSVG onClick={resetMode} />;
-    const style = { marginRight: "50px" };
 
-    if (mode === "random") return <div className="sub-bar">
-        <Button style={style} onClick={loadRandom}>Repeat</Button>
+    if (mode === "random") return <div className="sub">
+        <Button onClick={loadRandom}><RefreshSVG /></Button>
         {exit}
     </div>
 
-    if (mode === "search") return <div className="sub-bar">
+    if (mode === "search") return <div className="sub">
         <Search search={loadSearched} />
         {exit}
     </div>;

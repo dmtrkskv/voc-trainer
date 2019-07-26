@@ -20,6 +20,8 @@ class CardsBox extends React.PureComponent {
             sortMode: "en",
             shufflePassNum: 0
         };
+        this.prevShufflePassNum;
+        this.sortedKeys;
         this.flipTimer;
         this.sideValues = { "en": false, "ru": true, "random": null };
         Object.freeze(this.sideValues);
@@ -48,7 +50,20 @@ class CardsBox extends React.PureComponent {
         let wE = Object.entries(words);
 
         if (sortMode === "random") {
-            wE.sort(compareRandom);
+            let newKeys = Object.keys(words);
+            if (this.prevShufflePassNum === appendage) {
+                // получить старые ключи
+                let prevKeys = clone(this.sortedKeys);
+                // удалить ключи, которые теперь пропали
+                prevKeys = prevKeys.filter(key => words[key] !== undefined);
+                // получить ключи, которые теперь появились
+                newKeys = newKeys.filter(key => !prevKeys.includes(key));
+                // добавить в начало ключи, которые пришли                 
+                return [...newKeys, ...prevKeys];
+            } else {
+                this.prevShufflePassNum = appendage;
+                return newKeys.sort(compareRandom);
+            }
         } else if (sortMode === "en" || sortMode === "ru") {
             wE.sort((a, b) => compare(a, b, sortMode));
         } else {
@@ -145,9 +160,9 @@ class CardsBox extends React.PureComponent {
         const { sides, isRemoveMode, removedKeysBuffer, sortMode, shufflePassNum } = this.state;
 
         const appendage = sortMode === "random" ? shufflePassNum : void 0;
-        const sortedKeys = this.getSortedKeys(sortMode, words, appendage);
+        this.sortedKeys = this.getSortedKeys(sortMode, words, appendage);
 
-        const isBoxEmpty = sortedKeys.length === 0
+        const isBoxEmpty = this.sortedKeys.length === 0
 
         const bar = <Bar
             isRemoveMode={isRemoveMode}
@@ -166,7 +181,7 @@ class CardsBox extends React.PureComponent {
 
         return <div id="cards-box">
             {bar}
-            <Content sortedKeys={sortedKeys} words={words}
+            <Content sortedKeys={this.sortedKeys} words={words}
                 isRemoveMode={isRemoveMode}
                 removedKeysBuffer={removedKeysBuffer}
                 sides={sides} handleClick={this.handleClick}

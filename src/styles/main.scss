@@ -1,3 +1,15 @@
+// шапка на всю страницу
+// максимальная ширина содержимого - $max-content-width
+
+// кнопка имеет по-умолчанию фиксированную высоту, резиновую ширину
+// фиксированный padding
+// т.к. svg в панели должны иметь те же габариты, что и текст
+// при необходимости резиновая высота будет задаваться через height: auto
+
+//#root -> #main-wrapper -> (#nav, .react-swipe-container)
+
+$max-content-width: 1000px;
+
 $confirm-panel-height: 80px;
 $confirm-panel-padding: 10px;
 
@@ -21,6 +33,13 @@ $nightRed: #240000;
   width: 100%;
 }
 
+@media screen and (min-width: 960px) {
+  html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+  }
+}
+
 .center-wrapper {
   display: flex;
   width: 100%;
@@ -37,406 +56,486 @@ $nightRed: #240000;
 }
 
 body {
+  font-family: Arial;
+
+  user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
   overflow-x: hidden;
+  margin: 0;
 }
 
 #root {
-  -moz-user-select: none;
-  -khtml-user-select: none;
-  user-select: none;
+  #main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  > div {
+    width: 100%;
     background: white;
-  }
 
-  ///////////
+    &.night {
+      background: black;
+      color: white;
+      fill: white;
 
-  > .night {
-    background: black;
-    color: white;
+      input {
+        color: white;
+        background: black !important;
+        caret-color: white;
+      }
 
-    .confirm {
-      background: $nightGrey !important;
-    }
-
-    .bar {
-      border-color: $nightGrey !important;
-    }
-
-    .bundle {
-      border-color: $nightGrey !important;
-    }
-
-    #main > #nav {
-      box-shadow: 0 10px 4px $contrastNightGrey !important;
-    }
-
-    #words {
-      > :nth-child(even) {
+      .confirm {
         background: $nightGrey !important;
       }
 
-      .word {
-        border-color: $contrastNightGrey !important;
-
-        &.selectable {
-          &:hover {
-            background: $nightRed !important;
-            &.checked {
-              background: $nightGreen !important;
-            }
+      .pagination {
+        > li {
+          > a {
+            background: $nightGrey !important;
+            color: white !important;
+          }
+          &.selected > a {
+            background: $orange !important;
+            color: white !important;
           }
         }
       }
-    }
-    .card > .front,
-    .back {
-      background: black !important;
-    }
-  }
 
-  ////////
-
-  > .wrapper {
-    overflow-x: hidden;
-  }
-}
-
-.button {
-  display: inline-flex;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  margin-top: 4px;
-  border-bottom: 4px solid transparent;
-
-  &.disabled {
-    color: lightgray;
-  }
-
-  &.active {
-    border-color: $blue;
-  }
-
-  &.attractive {
-    border-color: $orange;
-  }
-}
-
-#footer {
-  @extend .inline;
-  width: 100%;
-  justify-content: center;
-  position: fixed;
-  bottom: 0;
-}
-
-#main {
-  > #nav {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    position: relative;
-    height: 90px;
-    box-shadow: 0 10px 4px $contrastDayGrey;
-    background: $blue;
-    padding-left: 60px;
-
-    #moon {
-      fill: white;
-      position: absolute;
-      left: 10px;
-    }
-
-    .button {
-      color: white;
-      &.active {
-        border-color: $orange;
-      }
-    }
-  }
-  > .react-swipe-container {
-    > div {
-      // почему-то props стилей по умолчанию не принимаются в react-swipe
-      > div {
-        float: left;
-        position: relative;
-        overflow: hidden;
-      }
-
-      .bundle {
-        display: flex;
-        align-items: center;
-
-        padding: 0 3px;
-
-        border-width: 0 3px;
-        border-style: solid;
-        border-color: $dayGrey;
-
-        > * {
-          margin: 3px 3px;
+      .button {
+        &.disabled {
+          color: grey !important;
         }
       }
 
       .bar {
-        display: flex;
-        align-items: center;
+        border-color: $nightGrey !important;
+        .sub {
+          background: $contrastNightGrey !important;
+        }
+      }
 
-        margin-bottom: 40px;
-        border-bottom: 2px solid $dayGrey;
+      .bundle {
+        border-color: $nightGrey !important;
+      }
+
+      > #nav {
+        box-shadow: 0 10px 4px $contrastNightGrey !important;
+        #moon {
+          fill: $orange;
+        }
+      }
+
+      #words {
+        > :nth-child(even) {
+          background: $nightGrey !important;
+        }
+
+        .word {
+          border-color: $contrastNightGrey !important;
+
+          &.selectable {
+            &:hover {
+              background: $nightRed !important;
+              &.checked {
+                background: $nightGreen !important;
+              }
+            }
+          }
+        }
+      }
+      .card > .front,
+      .back {
+        background: black !important;
+      }
+    }
+
+    > #nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+
+      width: 100%;
+      height: 90px;
+
+      box-shadow: 0 10px 4px $contrastDayGrey;
+      background: $blue;
+      padding-left: 40px;
+      margin-bottom: 10px;
+
+      #moon {
+        fill: white;
+        position: absolute;
+        left: 40px;
+      }
+
+      #tabs {
+        display: flex;
+        justify-content: space-evenly;
 
         width: 100%;
-        position: relative;
-        height: 100px;
+        max-width: $max-content-width;
 
-        > * {
-          margin-right: 30px;
+        .button {
+          color: white;
+          &.active {
+            border-color: $orange;
+          }
         }
       }
+    }
 
-      .empty {
-        text-align: center;
-        color: lightgray;
-        font-size: 40px;
-      }
+    > .react-swipe-container {
+      width: 100%;
+      max-width: $max-content-width;
 
-      #words-box {
-        .sub-bar {
+      overflow: hidden;
+      visibility: hidden;
+      position: relative;
+
+      > div {
+        overflow: hidden;
+        position: relative;
+
+        > div {
+          float: left;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .bundle {
           display: flex;
           align-items: center;
-          width: 100%;
-          height: 60px;
-          background: $dayGrey;
-          margin-bottom: 30px;
+
+          padding: 0 3px;
+
+          border-width: 0 3px;
+          border-style: solid;
+          border-color: $dayGrey;
+
+          > * {
+            margin: 0 3px;
+          }
         }
 
-        #words {
-          display: flex;
-          flex-wrap: wrap;
-          flex-direction: column;
-          width: 100%;
+        .bar {
+          display: block;
+          margin-bottom: 40px;
 
-          > :nth-child(even) {
-            background: $dayGrey;
-          }
-
-          .word {
+          .main {
+            display: inline-flex;
             align-items: center;
-            display: flex;
-            height: 60px;
+
+            position: relative;
+
             width: 100%;
-            padding: 0 40px;
-            border-bottom: 1px solid $contrastDayGrey;
+            height: 100px;
 
-            &.head {
-              font-weight: bold;
-              border-bottom: 4px solid $contrastDayGrey;
+            border-bottom: 2px solid $dayGrey;
 
-              > input {
-                visibility: hidden;
-              }
+            .button {
+              height: 40px;
             }
 
-            &.selectable {
-              &:hover {
-                background: $dayRed;
-                &.checked {
-                  background: $dayGreen;
+            > * {
+              margin-right: 2%;
+            }
+          }
+
+          .sub {
+            display: flex;
+            align-items: center;
+            width: 100%;
+            height: 60px;
+            background: $dayGrey;
+            font-size: 20px;
+
+            transition: height 200ms;
+
+            > * {
+              margin: 0 30px;
+            }
+
+            input {
+              border-radius: 5px;
+              height: 20px;
+            }
+          }
+        }
+
+        .empty {
+          text-align: center;
+          font-size: 40px;
+        }
+
+        #words-box {
+          #words {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            width: 100%;
+
+            > :nth-child(even) {
+              background: $dayGrey;
+            }
+
+            .word {
+              align-items: center;
+              display: flex;
+              height: 60px;
+              width: 100%;
+              padding: 0 40px;
+              border-bottom: 1px solid $contrastDayGrey;
+
+              &.head {
+                font-weight: bold;
+                border-bottom: 4px solid $contrastDayGrey;
+
+                > input {
+                  visibility: hidden;
                 }
               }
-            }
 
-            > div,
-            > input {
-              width: 0;
-              overflow: hidden;
-              white-space: nowrap;
-              transition: flex 300ms ease;
-            }
+              &.selectable {
+                &:hover {
+                  background: $dayRed;
+                  &.checked {
+                    background: $dayGreen;
+                  }
+                }
+              }
 
-            > input {
-              height: 15px;
+              > div,
+              > input {
+                width: 0;
+                overflow: hidden;
+                white-space: nowrap;
+                transition: flex 300ms ease;
+              }
+
+              > input {
+                height: 15px;
+              }
+            }
+          }
+
+          .pagination {
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            padding: 0 5px;
+            width: 100%;
+            max-width: $max-content-width;
+            list-style-type: none;
+            margin-top: 40px;
+            > li {
+              > a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                margin: 0 3px;
+
+                padding: 0 10px;
+                height: 30px;
+                border-radius: 15px;
+
+                background: $dayGrey;
+                color: black;
+              }
+              &.selected > a {
+                background: $orange;
+                color: white;
+              }
             }
           }
         }
 
-        .pagination {
-          display: flex;
-          justify-content: space-evenly;
-          align-items: center;
-          padding: 0 5px;
-          width: 100%;
-          max-width: 1000px;
-          list-style-type: none;
-          margin-top: 40px;
-          > li {
-            > a {
+        #tape-box {
+          #tape {
+            width: 100%;
+
+            .cards {
+              position: relative;
+              width: 100%;
+              height: 300px;
+              display: flex;
+              align-items: center;
+            }
+
+            .confirm {
+              @extend .inline;
+              height: $confirm-panel-height;
+              padding: $confirm-panel-padding 0;
+              justify-content: center;
+              background: $dayGrey;
+              input {
+                height: 25px;
+                border-radius: 10px;
+              }
+
+              .next-wrapper {
+                margin-left: 30px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: $confirm-panel-height;
+              }
+            }
+
+            .result {
               display: flex;
               justify-content: center;
+              flex-direction: column;
               align-items: center;
+              width: 100%;
 
-              margin: 0 3px;
-
-              padding: 0 10px;
-              height: 30px;
-              border-radius: 15px;
-
-              background: $dayGrey;
-              color: black;
-            }
-            &.selected > a {
-              background: $orange;
-              color: white;
+              > div {
+                margin-bottom: 30px;
+                font-size: 40px;
+              }
             }
           }
         }
-      }
 
-      #tape-box {
-        #tape {
-          width: 100%;
-
+        #cards-box {
           .cards {
-            position: relative;
-            width: 100%;
-            height: 300px;
             display: flex;
-            align-items: center;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+          }
+        }
+
+        .card-wrapper {
+          position: absolute;
+          transition: transform 500ms, left 500ms, opacity 500ms;
+
+          margin: 10px;
+          min-width: 300px;
+          min-height: 100px;
+
+          &.shake {
+            animation: shake 150ms infinite ease-in-out alternate;
+
+            @keyframes shake {
+              from {
+                transform: rotate(1deg);
+              }
+              to {
+                transform: rotate(-1deg);
+              }
+            }
           }
 
-          .confirm {
-            @extend .inline;
-            height: $confirm-panel-height;
-            padding: $confirm-panel-padding 0;
-            justify-content: center;
-            background: $dayGrey;
-            input {
-              height: 25px;
-              border-radius: 10px;
+          .card {
+            @extend %stretch;
+            position: absolute;
+            transition: transform 500ms;
+            transform-origin: center;
+            transform-style: preserve-3d;
+
+            &.flip {
+              transform: rotateX(180deg);
             }
 
-            .next-wrapper {
-              margin-left: 30px;
+            .front,
+            .back {
+              &.correct {
+                border-color: rgb(153, 255, 187);
+                background: rgb(153, 255, 187);
+              }
+
+              &.wrong {
+                border-color: rgb(255, 154, 154);
+                background: rgb(255, 154, 154);
+              }
+            }
+
+            &.removed {
+              > div {
+                border-color: grey;
+                background: $dayGrey;
+              }
+            }
+
+            .front,
+            .back {
               display: flex;
               justify-content: center;
               align-items: center;
-              height: 100%;
-              width: $confirm-panel-height;
-            }
-          }
 
-          .result {
-            display: flex;
-            justify-content: center;
-            flex-direction: column;
-            align-items: center;
-            width: 100%;
+              backface-visibility: hidden;
 
-            > div {
-              margin-bottom: 30px;
-              font-size: 40px;
-            }
-          }
-        }
-      }
+              @extend %stretch;
 
-      #cards-box {
-        .cards {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-around;
-          width: 90%;
-        }
-      }
+              position: absolute;
+              top: 0;
+              left: 0;
 
-      .card-wrapper {
-        position: absolute;
-        transition: transform 500ms, left 500ms, opacity 500ms;
+              border-radius: 10px;
+              background: white;
 
-        margin: 10px 0;
-        min-width: 300px;
-        min-height: 100px;
+              border-width: 3px;
+              border-style: solid;
 
-        &.shake {
-          animation: shake 150ms infinite ease-in-out alternate;
-
-          @keyframes shake {
-            from {
-              transform: rotate(1deg);
-            }
-            to {
-              transform: rotate(-1deg);
-            }
-          }
-        }
-
-        .card {
-          @extend %stretch;
-          position: absolute;
-          transition: transform 500ms;
-          transform-origin: center;
-          transform-style: preserve-3d;
-
-          &.flip {
-            transform: rotateX(180deg);
-          }
-
-          .front,
-          .back {
-            &.correct {
-              border-color: rgb(153, 255, 187);
-              background: rgb(153, 255, 187);
+              box-sizing: border-box;
             }
 
-            &.wrong {
-              border-color: rgb(255, 154, 154);
-              background: rgb(255, 154, 154);
+            .front {
+              border-color: $blue;
+              z-index: 2;
             }
-          }
 
-          &.removed {
-            > div {
-              border-color: grey;
-              background: $dayGrey;
+            .back {
+              border-color: $orange;
+              transform: rotateX(180deg);
             }
-          }
-
-          .front,
-          .back {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            backface-visibility: hidden;
-
-            @extend %stretch;
-
-            position: absolute;
-            top: 0;
-            left: 0;
-
-            border-radius: 10px;
-            background: white;
-
-            border-width: 3px;
-            border-style: solid;
-
-            box-sizing: border-box;
-          }
-
-          .front {
-            border-color: $blue;
-            z-index: 2;
-          }
-
-          .back {
-            border-color: $orange;
-            transform: rotateX(180deg);
           }
         }
       }
     }
   }
+
+  .button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+
+    padding: 20px;
+
+    margin-top: 4px;
+    border-bottom: 4px solid transparent;
+
+    &.disabled {
+      color: lightgray;
+    }
+
+    &.active {
+      border-color: $blue;
+    }
+
+    &.attractive {
+      border-color: $orange;
+    }
+  }
 }
+
+// #footer {
+//   @extend .inline;
+//   width: 100%;
+//   justify-content: center;
+//   position: fixed;
+//   bottom: 0;
+// }

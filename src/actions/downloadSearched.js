@@ -4,7 +4,7 @@ export const downloadSearched = (str, num) => dispatch => {
     let arr = Object.entries(data);
 
     str = str.toLowerCase().trim();
-    const lang = /[A-Za-z]*/.test(str) ? "en" : "ru";
+    const lang = /[а-я]/i.test(str) ? "ru" : "en";
 
     const l = str.length;
 
@@ -16,6 +16,6 @@ export const downloadSearched = (str, num) => dispatch => {
     arr = arr.slice(0, num);
 
     const items = Object.fromEntries(arr);
-    dispatch({ type: "UPDATE_ITEMS", payload: items });
+    dispatch({ type: "UPDATE_ITEMS", payload: { items, totalItems: num } });
     dispatch({ type: "MODIFY_ITEMS" });
 }

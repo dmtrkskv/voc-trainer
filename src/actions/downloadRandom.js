@@ -7,6 +7,6 @@ export const downloadRandom = num => dispatch => {
     arr = arr.slice(0, num);
 
     const items = Object.fromEntries(arr);
-    dispatch({ type: "UPDATE_ITEMS", payload: items });
+    dispatch({ type: "UPDATE_ITEMS", payload: { items, totalItems: num } });
     dispatch({ type: "MODIFY_ITEMS" });
 }

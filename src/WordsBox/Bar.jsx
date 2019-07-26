@@ -18,25 +18,30 @@ export default function Bar(props) {
         props.load("search", "");
     }
 
+    const childWithProps = React.cloneElement(props.children, { load: props.load, mode: props.mode });
+
     return <div className="bar">
-        {
-            isCheckBoxesOpened ?
-                <div className="bundle">
-                    <Button attractive onClick={props.confirmSelection}>Done</Button>
-                    <Button onClick={props.cancelSelection}>Cancel</Button>
-                </div> :
-                <div>
-                    <Button onClick={props.openChecks}>Edit</Button>
-                </div>
-        }
-        <div className="bundle">
-            <Button active={activeParts.en} onClick={() => props.toggleWordsPart("en")}>EN</Button>
-            <Button active={activeParts.tr} onClick={() => props.toggleWordsPart("tr")}>TR</Button>
-            <Button active={activeParts.ru} onClick={() => props.toggleWordsPart("ru")}>RU</Button>
+        <div className="main">
+            {
+                isCheckBoxesOpened ?
+                    <div className="bundle">
+                        <Button attractive onClick={props.confirmSelection}>Done</Button>
+                        <Button onClick={props.cancelSelection}>Cancel</Button>
+                    </div> :
+                    <div>
+                        <Button onClick={props.openChecks}>Edit</Button>
+                    </div>
+            }
+            <div className="bundle">
+                <Button active={activeParts.en} onClick={() => props.toggleWordsPart("en")}>EN</Button>
+                <Button active={activeParts.tr} onClick={() => props.toggleWordsPart("tr")}>TR</Button>
+                <Button active={activeParts.ru} onClick={() => props.toggleWordsPart("ru")}>RU</Button>
+            </div>
+            <div className="bundle">
+                <Button active={mode === "random"} onClick={switchToRandomMode}><DicesSVG /></Button>
+                <Button active={mode === "search"} onClick={switchToSearchMode}><MagnifierSVG /></Button>
+            </div>
         </div>
-        <div className="bundle">
-            <Button active={mode === "random"} onClick={switchToRandomMode}><DicesSVG /></Button>
-            <Button active={mode === "search"} onClick={switchToSearchMode}><MagnifierSVG /></Button>
-        </div>
+        {childWithProps}
     </div >;
 }
