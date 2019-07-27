@@ -115,7 +115,9 @@ body {
       }
 
       .bar {
-        border-color: $nightGrey !important;
+        .main {
+          border-color: $nightGrey !important;
+        }
         .sub {
           background: $contrastNightGrey !important;
         }
@@ -125,7 +127,7 @@ body {
         border-color: $nightGrey !important;
       }
 
-      > #nav {
+      > #nav {        
         box-shadow: 0 10px 4px $contrastNightGrey !important;
         #moon {
           fill: $orange;
@@ -426,8 +428,8 @@ body {
 
           &.shake {
             animation: shake 150ms infinite ease-in-out alternate;
-
-            @keyframes shake {
+            
+            @keyframes shake {              
               from {
                 transform: rotate(1deg);
               }
@@ -474,6 +476,7 @@ body {
               justify-content: center;
               align-items: center;
 
+              -webkit-backface-visibility: hidden;
               backface-visibility: hidden;
 
               @extend %stretch;
@@ -510,12 +513,8 @@ body {
     display: inline-flex;
     justify-content: center;
     align-items: center;
-
     position: relative;
-
-    padding: 20px;
-
-    margin-top: 4px;
+    padding: 20px 15px;
     border-bottom: 4px solid transparent;
 
     &.disabled {

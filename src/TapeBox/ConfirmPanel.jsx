@@ -2,6 +2,9 @@ import React from "react";
 import ReactMinimalPieChart from 'react-minimal-pie-chart';
 import Button from "../Button.jsx";
 
+import { Context } from "../Context.jsx";
+
+
 export default class ConfirmPanel extends React.Component {
     constructor(props) {
         super(props);
@@ -12,6 +15,8 @@ export default class ConfirmPanel extends React.Component {
         this.scrollingTimerDur = 1500;
         this.scrollingTimerId = null;
     }
+
+    static contextType = Context;
 
     setScrollingTimer = () => {
         this.scrollingTimerId = setTimeout(
@@ -44,13 +49,22 @@ export default class ConfirmPanel extends React.Component {
     render() {
         const { mode, isActiveCardFlipped: flipped } = this.props;
 
+        const { theme } = this.context;
+        const chartBg = theme === "day" ? "#efefef" : "#242424";
+        const nextBtnLabelColor = theme === "day" ?
+            (flipped ? "black" : "lightgrey") :
+            (flipped ? "white" : "grey");
+
         const next = <div className="next-wrapper" onClick={this.onNextClick}>
             <ReactMinimalPieChart
                 label={() => "Next"}
                 labelPosition={0}
-                labelStyle={{ fontSize: "20px", fill: flipped ? "black" : "lightgrey" }}
+                labelStyle={{
+                    fontSize: "20px",
+                    fill: nextBtnLabelColor
+                }}
                 data={[{ value: 1, key: 1, color: '#00ceff' }]}
-                background="#efefef"
+                background={chartBg}
 
                 startAngle={-90}
                 reveal={flipped ? 100 : 0}

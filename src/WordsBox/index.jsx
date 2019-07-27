@@ -23,8 +23,9 @@ class WordsBox extends React.Component {
         };
 
         this.numberPerPage = 15;
+        this.pageNumber = 0;
 
-        this.onPageChange({ selected: 0 });
+        this.onPageChange({ selected: this.pageNumber });
     }
 
     switchMode = mode => {
@@ -41,7 +42,7 @@ class WordsBox extends React.Component {
                 break;
             default:
                 this.props.getPage(
-                    0, this.numberPerPage
+                    this.pageNumber, this.numberPerPage
                 );
         }
     }
@@ -69,8 +70,10 @@ class WordsBox extends React.Component {
     }
 
     onPageChange = (pagesObj) => {
+        this.pageNumber = pagesObj.selected;
+
         this.props.getPage(
-            pagesObj.selected, this.numberPerPage
+            this.pageNumber, this.numberPerPage
         );
     }
 
@@ -102,7 +105,7 @@ class WordsBox extends React.Component {
 
                 {wordsNum >= this.numberPerPage &&
                     <Pagination
-                        initialPage={0}
+                        initialPage={this.pageNumber}
                         pageCount={totalWords / this.numberPerPage}
                         pageRangeDisplayed={3}
                         marginPagesDisplayed={1}

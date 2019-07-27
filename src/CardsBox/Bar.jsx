@@ -16,19 +16,15 @@ export default function Bar(props) {
                     onClick={props.toggleRemoveMode}>Remove</Button>
             }
             <div className="bundle">
-                <div className="bundle">
-                    <Button
-                        active={sortMode === "en"}
-                        onClick={() => props.sort("en")}>Sort En</Button>
-                    <Button
-                        active={sortMode === "ru"}
-                        onClick={() => props.sort("ru")}>Sort Ru</Button>
-                    <div className="bundle">
-                        <Button
-                            onClick={() => props.sort("random")}>Shuffle</Button>
-                    </div>
-                </div>
+                <Button
+                    active={sortMode === "en"}
+                    onClick={() => props.sort("en")}>Sort En</Button>
+                <Button
+                    active={sortMode === "ru"}
+                    onClick={() => props.sort("ru")}>Sort Ru</Button>
             </div>
+            <Button
+                onClick={() => props.sort("random")}>Shuffle</Button>
         </div>
     </div >;
 }

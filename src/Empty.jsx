@@ -1,6 +1,16 @@
 import React from "react";
 import Button from "./Button.jsx";
 
+import { Context } from "./Context.jsx";
+
 export default function Empty(props) {
-    return <div className="empty">It`s empty <br /> <Button attractive>Click</Button> to add items</div>
+    return <Context.Consumer>
+        {({ theme, beginSelection }) =>
+            <div className="empty">
+                It`s empty <br />
+                <Button onClick={beginSelection} attractive>Click</Button>
+                to add items
+                 </div>
+        }
+    </Context.Consumer>
 }

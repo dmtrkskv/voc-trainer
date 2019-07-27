@@ -1,4 +1,4 @@
-import data from "./serverImitation.js";
+import data from "../serverImitation/index.js";
 
 export const downloadSearched = (str, num) => dispatch => {
     let arr = Object.entries(data);

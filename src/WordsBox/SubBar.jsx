@@ -27,7 +27,10 @@ export default function SubBar(props) {
     const exit = <BackspaceArrowSVG onClick={resetMode} />;
 
     if (mode === "random") return <div className="sub">
-        <Button onClick={loadRandom}><RefreshSVG /></Button>
+        <div style={{fontSize: "15px", marginRight: 0}}>{"10 random"}</div>
+        <Button onClick={loadRandom}>
+            <RefreshSVG />
+        </Button>
         {exit}
     </div>
 

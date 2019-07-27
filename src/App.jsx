@@ -14,17 +14,19 @@ import TapeBox from "./TapeBox/index.jsx";
 // при свайпе сначала проиходит переключение,
 // а затем загорается индикатор
 
+import { Context } from "./Context.jsx";
+
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { nightTheme: false };
+        this.state = { theme: "day" };
         this.bodyRef = document.getElementsByTagName("body")[0];
     }
 
     toggleTheme = () => {
-        const newTheme = !this.state.nightTheme;
-        this.bodyRef.style.background = newTheme ? "black" : "white";
-        this.setState({ nightTheme: newTheme });
+        const newTheme = this.state.theme === "day" ? "night" : "day";
+        this.bodyRef.style.background = newTheme === "night" ? "black" : "white";
+        this.setState({ theme: newTheme });
     }
 
     switchTab = toPos => {
@@ -37,29 +39,36 @@ class App extends React.Component {
         }
     }
 
+    beginSelection = () => {
+        this.reactSwipeEl.slide(0);
+    }
+
     render() {
         let wrapperClassName = "";
-        this.state.nightTheme && (wrapperClassName += " night");
+        this.state.theme === "night" && (wrapperClassName += " night");
 
         return <div id="main-wrapper" className={wrapperClassName}>
+            <Context.Provider value={
+                {theme: this.state.theme, beginSelection: this.beginSelection}
+                }>
+                <TabsPanel
+                    toggleTheme={this.toggleTheme}
+                    switchTab={this.switchTab}
+                />
 
-            <TabsPanel
-                toggleTheme={this.toggleTheme}
-                switchTab={this.switchTab}
-            />
+                <ReactSwipe
+                    swipeOptions={{
+                        transitionEnd: this.props.swipe,
+                        startSlide: this.props.activeTab
+                    }}
+                    ref={el => (this.reactSwipeEl = el)}
+                >
+                    <WordsBox />
+                    <CardsBox />
+                    <TapeBox />
 
-            <ReactSwipe
-                swipeOptions={{
-                    transitionEnd: this.props.swipe,
-                    startSlide: this.props.activeTab
-                }}
-                ref={el => (this.reactSwipeEl = el)}
-            >
-                <WordsBox />
-                <CardsBox />
-                <TapeBox />
-
-            </ReactSwipe>
+                </ReactSwipe>
+            </Context.Provider>
         </div>;
     }
 }

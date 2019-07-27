@@ -9,7 +9,7 @@ export default function Card(props) {
 
     if (shakes) {
         wrapperClassName += " shake";
-        style.animationDelay = Math.floor((Math.random()) * 150) + "ms";
+        style.animationDelay = -Math.floor((Math.random()) * 150) + "ms";       
     }
 
     let sidesClasses = { front: "front", back: "back" };

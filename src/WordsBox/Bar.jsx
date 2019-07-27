@@ -29,7 +29,7 @@ export default function Bar(props) {
                         <Button onClick={props.cancelSelection}>Cancel</Button>
                     </div> :
                     <div>
-                        <Button onClick={props.openChecks}>Edit</Button>
+                        <Button attractive onClick={props.openChecks}>Edit</Button>
                     </div>
             }
             <div className="bundle">
