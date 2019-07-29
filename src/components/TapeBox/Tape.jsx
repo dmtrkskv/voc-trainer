@@ -18,18 +18,12 @@ export default class Tape extends React.Component {
         this.centerPos = Math.floor(this.maxRenderedCardsNum / 2);
     }
 
-    componentDidMount() {
-        this.setParams();
+    onResize = width => {
+        this.setParams(width);
     }
-
-    onResize = () => {
-        this.setParams();
-    }
-    setParams() {
-        const { clientWidth } = document.documentElement;
-
+    setParams(elWidth) {
         const interval = this.cardWidth + 50;
-        const offset = (interval * this.maxRenderedCardsNum - clientWidth) / 2;
+        const offset = (interval * this.maxRenderedCardsNum - elWidth) / 2;
 
         this.setState({
             interval: interval,
@@ -68,7 +62,7 @@ export default class Tape extends React.Component {
             let side = sides[curKey], isCorrect = null;
             if (pos < c || (pos === c && isActiveCardFlipped)) {
                 side = !sides[curKey];
-                isCorrect = this.props.responsesStatuses[curKey];
+                isCorrect = responsesStatuses[curKey];
             }
 
             arr.push(

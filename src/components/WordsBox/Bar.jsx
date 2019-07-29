@@ -1,8 +1,8 @@
 import React from "react";
 import Button from "../Button.jsx"
 
-import DicesSVG from "../svg/dices.svg";
-import MagnifierSVG from "../svg/magnifier.svg";
+import DicesSVG from "../../svg/dices.svg";
+import MagnifierSVG from "../../svg/magnifier.svg";
 
 export default function Bar(props) {
     const { isCheckBoxesOpened, activeParts, mode } = props;

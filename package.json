@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "watch": "webpack -d",
-    "build": "webpack -p"
+    "build": "set NODE_ENV=production && webpack -p"
   },
   "author": "Dmitry Kuskov",
   "license": "ISC",

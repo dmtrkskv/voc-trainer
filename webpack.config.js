@@ -1,19 +1,18 @@
 'use strict';
 
-// const NODE_ENV = process.env.NODE_ENV || "development";
-// const NODE_ENV = "production";
+const NODE_ENV = process.env.NODE_ENV || "development";
 
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // выносим css в отдельный файл
 
 module.exports = {
-    // devtool: 'inline-source-map',
+    devtool: NODE_ENV === "development" ? 'inline-source-map' : false,
     entry: "./src/index.jsx",
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: "bundle.js"
     },
-    // watch: true,
+    watch: NODE_ENV === "development",
     watchOptions: {
         aggregateTimeout: 100
     },

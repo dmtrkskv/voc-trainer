@@ -3,8 +3,8 @@ import React from "react";
 import Search from "./Search.jsx";
 import Button from "../Button.jsx"
 
-import BackspaceArrowSVG from "../svg/backspace-arrow.svg";
-import RefreshSVG from "../svg/refresh.svg";
+import BackspaceArrowSVG from "../../svg/backspace-arrow.svg";
+import RefreshSVG from "../../svg/refresh.svg";
 
 export default function SubBar(props) {
     const { mode } = props;
@@ -27,7 +27,7 @@ export default function SubBar(props) {
     const exit = <BackspaceArrowSVG onClick={resetMode} />;
 
     if (mode === "random") return <div className="sub">
-        <div style={{fontSize: "15px", marginRight: 0}}>{"10 random"}</div>
+        <div style={{ fontSize: "15px", marginRight: 0 }}>{"10 random"}</div>
         <Button onClick={loadRandom}>
             <RefreshSVG />
         </Button>

@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import Button from "./Button.jsx";
-import MoonSVG from "./svg/moon.svg";
+import MoonSVG from "../svg/moon.svg";
 
 class TabsPanel extends React.Component {
     constructor(props) {

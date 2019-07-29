@@ -80,89 +80,10 @@ body {
     width: 100%;
     background: white;
 
-    &.night {
-      background: black;
-      color: white;
-      fill: white;
-
-      input {
-        color: white;
-        background: black !important;
-        caret-color: white;
-      }
-
-      .confirm {
-        background: $nightGrey !important;
-      }
-
-      .pagination {
-        > li {
-          > a {
-            background: $nightGrey !important;
-            color: white !important;
-          }
-          &.selected > a {
-            background: $orange !important;
-            color: white !important;
-          }
-        }
-      }
-
-      .button {
-        &.disabled {
-          color: grey !important;
-        }
-      }
-
-      .bar {
-        .main {
-          border-color: $nightGrey !important;
-        }
-        .sub {
-          background: $contrastNightGrey !important;
-        }
-      }
-
-      .bundle {
-        border-color: $nightGrey !important;
-      }
-
-      > #nav {        
-        box-shadow: 0 10px 4px $contrastNightGrey !important;
-        #moon {
-          fill: $orange;
-        }
-      }
-
-      #words {
-        > :nth-child(even) {
-          background: $nightGrey !important;
-        }
-
-        .word {
-          border-color: $contrastNightGrey !important;
-
-          &.selectable {
-            &:hover {
-              background: $nightRed !important;
-              &.checked {
-                background: $nightGreen !important;
-              }
-            }
-          }
-        }
-      }
-      .card > .front,
-      .back {
-        background: black !important;
-      }
-    }
-
     > #nav {
       display: flex;
       align-items: center;
       justify-content: center;
-      position: relative;
 
       width: 100%;
       height: 90px;
@@ -428,8 +349,8 @@ body {
 
           &.shake {
             animation: shake 150ms infinite ease-in-out alternate;
-            
-            @keyframes shake {              
+
+            @keyframes shake {
               from {
                 transform: rotate(1deg);
               }
@@ -507,6 +428,85 @@ body {
         }
       }
     }
+
+    &.night {
+      background: black;
+      color: white;
+      fill: white;
+
+      input {
+        color: white;
+        background: black !important;
+        caret-color: white;
+      }
+
+      .confirm {
+        background: $nightGrey !important;
+      }
+
+      .pagination {
+        > li {
+          > a {
+            background: $nightGrey !important;
+            color: white !important;
+          }
+          &.selected > a {
+            background: $orange !important;
+            color: white !important;
+          }
+        }
+      }
+
+      .button {
+        &.disabled {
+          color: grey !important;
+          fill: grey !important;
+        }
+      }
+
+      .bar {
+        .main {
+          border-color: $nightGrey !important;
+        }
+        .sub {
+          background: $contrastNightGrey !important;
+        }
+      }
+
+      .bundle {
+        border-color: $nightGrey !important;
+      }
+
+      > #nav {
+        box-shadow: 0 10px 4px $contrastNightGrey !important;
+        #moon {
+          fill: $orange;
+        }
+      }
+
+      #words {
+        > :nth-child(even) {
+          background: $nightGrey !important;
+        }
+
+        .word {
+          border-color: $contrastNightGrey !important;
+
+          &.selectable {
+            &:hover {
+              background: $nightRed !important;
+              &.checked {
+                background: $nightGreen !important;
+              }
+            }
+          }
+        }
+      }
+      .card > .front,
+      .back {
+        background: black !important;
+      }
+    }
   }
 
   .button {
@@ -519,6 +519,7 @@ body {
 
     &.disabled {
       color: lightgray;
+      fill: lightgray;
     }
 
     &.active {
@@ -530,11 +531,3 @@ body {
     }
   }
 }
-
-// #footer {
-//   @extend .inline;
-//   width: 100%;
-//   justify-content: center;
-//   position: fixed;
-//   bottom: 0;
-// }

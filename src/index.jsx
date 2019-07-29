@@ -6,9 +6,9 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 
-import wordsReducer from "./wordsReducer.js";
+import reducer from "./reducer.js";
 
-import App from './App.jsx';
+import App from './components/App.jsx';
 
 // необходимы экшены, которые:
 // -получают слова с сервера
@@ -26,7 +26,7 @@ window.clone = function (obj) {
     return JSON.parse(JSON.stringify(obj));
 }
 
-const store = createStore(wordsReducer, applyMiddleware(thunk));
+const store = createStore(reducer, applyMiddleware(thunk));
 
 ReactDOM.render(
     <Provider store={store}>

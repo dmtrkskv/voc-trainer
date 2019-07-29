@@ -1,6 +1,8 @@
 import React from "react";
 import Button from "../Button.jsx"
 
+import RemoveSVG from "../../svg/remove.svg";
+
 export default function Bar(props) {
     const { isRemoveMode, sortMode, isBoxEmpty } = props;
 
@@ -13,7 +15,7 @@ export default function Bar(props) {
                 </div> :
                 <Button
                     disabled={isBoxEmpty}
-                    onClick={props.toggleRemoveMode}>Remove</Button>
+                    onClick={props.toggleRemoveMode}><RemoveSVG /></Button>
             }
             <div className="bundle">
                 <Button

@@ -7,7 +7,7 @@ const initialState = {
     activeTab: 0
 };
 
-export default function wordsReducer(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     const { items, selected, selectionBuffer } = state;
 
     if (action.type === "UPDATE_ITEMS") {

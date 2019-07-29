@@ -6,11 +6,11 @@ import SubBar from "./SubBar.jsx";
 import Content from "./Content.jsx";
 import Pagination from "react-paginate";
 
-import { downloadPage } from '../actions/downloadPage.js';
-import { downloadRandom } from '../actions/downloadRandom.js';
-import { downloadSearched } from '../actions/downloadSearched.js';
-import { completeSelection } from '../actions/completeSelection.js';
-import { selectWord } from '../actions/selectWord.js';
+import { downloadPage } from '../../actions/downloadPage.js';
+import { downloadRandom } from '../../actions/downloadRandom.js';
+import { downloadSearched } from '../../actions/downloadSearched.js';
+import { completeSelection } from '../../actions/completeSelection.js';
+import { selectWord } from '../../actions/selectWord.js';
 
 class WordsBox extends React.Component {
     constructor(props) {

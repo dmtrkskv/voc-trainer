@@ -6,7 +6,7 @@ import Bar from "./Bar.jsx";
 import Empty from "../Empty.jsx";
 import Content from "./Content.jsx";
 
-import { unselectWords } from "../actions/unselectWords.js";
+import { unselectWords } from "../../actions/unselectWords.js";
 
 class CardsBox extends React.PureComponent {
     constructor(props) {
@@ -74,7 +74,8 @@ class CardsBox extends React.PureComponent {
 
         function compare(a, b, field) {
             // field - "en" / "ru"
-            const a2 = a[1][field], b2 = b[1][field];
+            const a2 = a[1][field].toLowerCase(),
+                b2 = b[1][field].toLowerCase();
             if (a2 > b2) {
                 return 1;
             }
