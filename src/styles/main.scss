@@ -1,11 +1,3 @@
-// шапка на всю страницу
-// максимальная ширина содержимого - $max-content-width
-
-// кнопка имеет по-умолчанию фиксированную высоту, резиновую ширину
-// фиксированный padding
-// т.к. svg в панели должны иметь те же габариты, что и текст
-// при необходимости резиновая высота будет задаваться через height: auto
-
 //#root -> #main-wrapper -> (#nav, .react-swipe-container)
 
 $max-content-width: 1000px;
@@ -96,7 +88,7 @@ body {
       #moon {
         fill: white;
         position: absolute;
-        left: 40px;
+        left: 15px;
       }
 
       #tabs {

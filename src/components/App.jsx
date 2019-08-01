@@ -8,12 +8,6 @@ import WordsBox from "./WordsBox/index.jsx";
 import CardsBox from "./CardsBox/index.jsx";
 import TapeBox from "./TapeBox/index.jsx";
 
-// при клике по вкладке, сначала переключается индикатор
-// , а затем проиходит переключение
-
-// при свайпе сначала проиходит переключение,
-// а затем загорается индикатор
-
 import { Context } from "./Context.jsx";
 
 class App extends React.Component {

@@ -10,18 +10,6 @@ import reducer from "./reducer.js";
 
 import App from './components/App.jsx';
 
-// необходимы экшены, которые:
-// -получают слова с сервера
-// -пробрасывают слово в буфер
-// -дают команду на объединение буфера
-
-// в редюсере необходимы обработчики, которые
-// -кладет слово в selBuffer
-// -объединяет selBuffer и sel
-// -вливает sel и selBuffer в pageWords ( это действие необходимо после
-// добавления слова в буфер, получения новых слов)
-
-
 window.clone = function (obj) {
     return JSON.parse(JSON.stringify(obj));
 }
