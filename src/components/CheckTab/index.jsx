@@ -96,7 +96,7 @@ class TapeBox extends React.PureComponent {
 
         // пока пусто
         if (totalDerivedCardsNum === 0 && !activeIndex) {
-            return <div id="tape-box">
+            return <div className="tape-box">
                 {bar}
                 <Empty />
             </div>;
@@ -106,7 +106,7 @@ class TapeBox extends React.PureComponent {
 
         // начать
         if (activeIndex === null) {
-            return <div id="tape-box">
+            return <div className="tape-box">
                 {bar}
                 <div className="center-wrapper">
                     <Button attractive style={{ fontSize: "40px" }} onClick={this.reset}>Start</Button>
@@ -120,9 +120,9 @@ class TapeBox extends React.PureComponent {
                 .filter(item => item === true)
                 .length;
 
-            return <div id="tape-box">
+            return <div className="check-tab">
                 {bar}
-                <div id="tape">
+                <div className="check-tab__tape">
                     <Result correctNum={correctNum} totalCardsNum={totalCardsNum} />
                 </div>
             </div>;
@@ -130,9 +130,9 @@ class TapeBox extends React.PureComponent {
 
         const checkWord = this.getCheckWord();
         // лента
-        return <div id="tape-box">
+        return <div className="check-tab">
             {bar}
-            <div id="tape">
+            <div className="check-tab__tape">
                 <Tape
                     words={words}
                     sides={sides}

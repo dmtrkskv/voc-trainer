@@ -174,13 +174,13 @@ class CardsBox extends React.PureComponent {
         />;
 
         if (isBoxEmpty) {
-            return <div id="cards-box">
+            return <div className="learning-tab">
                 {bar}
                 <Empty />
             </div>;
         }
 
-        return <div id="cards-box">
+        return <div className="learning-tab">
             {bar}
             <Content sortedKeys={this.sortedKeys} words={words}
                 isRemoveMode={isRemoveMode}

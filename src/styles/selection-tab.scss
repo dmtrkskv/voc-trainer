@@ -1,0 +1,77 @@
+@import "colors.scss";
+
+.selection-tab {
+}
+
+.words-table {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+
+  > :nth-child(even) {
+    background: $dayGrey;
+  }
+}
+
+.words-table__head,
+.words-table__row {
+  align-items: center;
+  display: flex;
+  height: 60px;
+  width: 100%;
+  padding: 0 40px;
+  border-bottom: 1px solid $contrastDayGrey;
+}
+
+.words-table__head {
+  font-weight: bold;
+  border-bottom: 4px solid $contrastDayGrey;
+
+  > input {
+    visibility: hidden;
+  }
+}
+
+.words-table__cell,
+.words-table__checkbox {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: flex 300ms ease;
+}
+
+.words-table__checkbox {
+  height: 15px;
+}
+
+.words-table__row_selectable {
+  &:hover {
+    background: $dayRed;
+    &.words-table__row_checked {
+      background: $dayGreen;
+    }
+  }
+}
+
+.app_night {
+  .words-table {
+    > :nth-child(even) {
+      background: $nightGrey;
+    }
+  }
+
+  .words-table__head,
+  .words-table__row {
+    border-color: $contrastNightGrey;
+  }
+
+  .words-table__row_selectable {
+    &:hover {
+      background: $nightRed;
+      &.words-table__row_checked {
+        background: $nightGreen;
+      }
+    }
+  }
+}

@@ -1,0 +1,47 @@
+@import "colors.scss";
+@import "sizes.scss";
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 90px;
+
+  box-shadow: 0 10px 4px $contrastDayGrey;
+  background: $blue;
+  padding-left: 40px;
+  margin-bottom: 10px;
+}
+
+.nav__theme-switch {
+  fill: white;
+  position: absolute;
+  left: 15px;
+}
+
+.nav__tabs {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: $max-content-width;
+}
+
+.nav__button {
+  color: white;
+  font-weight: bold;
+
+  &.button_active {
+    border-color: $orange;
+  }
+}
+
+.app_night {
+  > .nav {
+    box-shadow: 0 10px 4px $contrastNightGrey;
+  }
+  .nav__theme-switch {
+    fill: $orange;
+  }
+}

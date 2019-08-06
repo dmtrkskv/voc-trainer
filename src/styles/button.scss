@@ -1,0 +1,48 @@
+@import "colors.scss";
+
+.buttons-bundle {
+  display: flex;
+  align-items: center;
+
+  padding: 0 3px;
+
+  border-width: 0 3px;
+  border-style: solid;
+  border-color: $dayGrey;
+
+  > * {
+    margin: 0 3px;
+  }
+}
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px 15px;
+  border-bottom: 4px solid transparent;
+}
+
+.button_disabled {
+  color: lightgray;
+  fill: lightgray;
+}
+
+.button_active {
+  border-color: $blue;
+}
+
+.button_attractive {
+  border-color: $orange;
+}
+
+.app_night {
+  .buttons-bundle {
+    border-color: $nightGrey !important;
+  }
+  .button_disabled {
+    color: grey;
+    fill: grey;
+  }
+}

@@ -1,4 +1,13 @@
 import './styles/main.scss';
+import './styles/pagination.scss';
+import './styles/react-swipe.scss';
+import './styles/card.scss';
+import './styles/nav.scss';
+import './styles/button.scss';
+import './styles/bar.scss';
+import './styles/selection-tab.scss';
+import './styles/learning-tab.scss';
+import './styles/check-tab.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom';

@@ -1,0 +1,51 @@
+@import "colors.scss";
+
+$max-content-width: 1000px;
+
+// внешняя библиотека для React, БЭМ не получится использовать
+
+.pagination {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0 5px;
+  width: 100%;
+  max-width: $max-content-width;
+  list-style-type: none;
+  margin-top: 40px;
+  > li {
+    > a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      margin: 0 3px;
+
+      padding: 0 10px;
+      height: 30px;
+      border-radius: 15px;
+
+      background: $dayGrey;
+      color: black;
+    }
+    &.selected > a {
+      background: $orange;
+      color: white;
+    }
+  }
+}
+
+.app_night {
+  .pagination {
+    > li {
+      > a {
+        background: $nightGrey;
+        color: white;
+      }
+      &.selected > a {
+        background: $orange;
+        color: white;
+      }
+    }
+  }
+}

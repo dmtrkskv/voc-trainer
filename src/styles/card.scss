@@ -1,0 +1,103 @@
+@import "colors.scss";
+
+%stretch {
+  height: 100%;
+  width: 100%;
+}
+
+// wrapper не приветствуется в БЭМ,
+// но необходим для одновременного применения разных трансформаций
+
+.card-wrapper {
+  position: absolute;
+  transition: transform 500ms, left 500ms, opacity 500ms;
+
+  margin: 10px;
+  min-width: 300px;
+  min-height: 100px;
+}
+
+.card-wrapper_shake {
+  animation: shake 150ms infinite ease-in-out alternate;
+
+  @keyframes shake {
+    from {
+      transform: rotate(1deg);
+    }
+    to {
+      transform: rotate(-1deg);
+    }
+  }
+}
+
+.card {
+  @extend %stretch;
+  position: absolute;
+  transition: transform 500ms;
+  transform-origin: center;
+  transform-style: preserve-3d;
+}
+
+.card_flip {
+  transform: rotateX(180deg);
+}
+
+.card_removed {
+  > div {
+    border-color: grey;
+    background: $dayGrey;
+  }
+}
+
+.card__front,
+.card__back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  @extend %stretch;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  border-radius: 10px;
+  background: white;
+
+  border-width: 3px;
+  border-style: solid;
+
+  box-sizing: border-box;
+}
+
+.card__front {
+  border-color: $blue;
+  z-index: 2;
+}
+
+.card__back {
+  border-color: $orange;
+  transform: rotateX(180deg);
+}
+
+.card__front_correct,
+.card__back_correct {
+  border-color: rgb(153, 255, 187);
+  background: rgb(153, 255, 187);
+}
+
+.card__front_wrong,
+.card__back_wrong {
+  border-color: rgb(255, 154, 154);
+  background: rgb(255, 154, 154);
+}
+
+.app_night {
+  .card__front,
+  .card__back {
+    background: black;
+  }
+}

@@ -7,9 +7,9 @@ export default function Bar(props) {
     const { isRemoveMode, sortMode, isBoxEmpty } = props;
 
     return <div className="bar">
-        <div className="main">
+        <div className="bar__main">
             {isRemoveMode ?
-                <div className="bundle">
+                <div className="buttons-bundle">
                     <Button attractive onClick={props.removeCards}>Done</Button>
                     <Button onClick={props.toggleRemoveMode}>Cancel</Button>
                 </div> :
@@ -17,7 +17,7 @@ export default function Bar(props) {
                     disabled={isBoxEmpty}
                     onClick={props.toggleRemoveMode}><RemoveSVG /></Button>
             }
-            <div className="bundle">
+            <div className="buttons-bundle">
                 <Button
                     active={sortMode === "en"}
                     onClick={() => props.sort("en")}>Sort En</Button>

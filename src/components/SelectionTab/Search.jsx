@@ -17,6 +17,11 @@ export default class Search extends React.Component {
 
     render() {
         const style = { ...this.defStyle, ...this.props.style };
-        return <input style={style} type="text" value={this.state.value} onChange={this.handleChange} />;
+        return <input
+            className="bar__search"
+            style={style}
+            type="text"
+            value={this.state.value}
+            onChange={this.handleChange} />;
     }
 }

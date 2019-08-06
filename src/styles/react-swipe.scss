@@ -1,0 +1,24 @@
+@import "sizes.scss";
+
+// из документации к библиотеке
+
+.react-swipe-container {
+  width: 100%;
+  max-width: $max-content-width;
+
+  overflow: hidden;
+  visibility: hidden;
+  position: relative;
+
+  > div {
+    overflow: hidden;
+    position: relative;
+
+    > div {
+      float: left;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+  }
+}

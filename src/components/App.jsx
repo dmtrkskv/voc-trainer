@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 
 import ReactSwipe from "react-swipe";
-import TabsPanel from "./TabsPanel.jsx";
+import Nav from "./Nav.jsx";
 
-import WordsBox from "./WordsBox/index.jsx";
-import CardsBox from "./CardsBox/index.jsx";
-import TapeBox from "./TapeBox/index.jsx";
+import SelectionTab from "./SelectionTab/index.jsx";
+import LearningTab from "./LearningTab/index.jsx";
+import CheckTab from "./CheckTab/index.jsx";
 
 import { Context } from "./Context.jsx";
 
@@ -38,14 +38,14 @@ class App extends React.Component {
     }
 
     render() {
-        let wrapperClassName = "";
-        this.state.theme === "night" && (wrapperClassName += " night");
+        let appClassName = "app";
+        this.state.theme === "night" && (appClassName += " app_night");
 
-        return <div id="main-wrapper" className={wrapperClassName}>
+        return <div className={appClassName}>
             <Context.Provider value={
-                {theme: this.state.theme, beginSelection: this.beginSelection}
-                }>
-                <TabsPanel
+                { theme: this.state.theme, beginSelection: this.beginSelection }
+            }>
+                <Nav
                     toggleTheme={this.toggleTheme}
                     switchTab={this.switchTab}
                 />
@@ -57,9 +57,9 @@ class App extends React.Component {
                     }}
                     ref={el => (this.reactSwipeEl = el)}
                 >
-                    <WordsBox />
-                    <CardsBox />
-                    <TapeBox />
+                    <SelectionTab />
+                    <LearningTab />
+                    <CheckTab />
 
                 </ReactSwipe>
             </Context.Provider>

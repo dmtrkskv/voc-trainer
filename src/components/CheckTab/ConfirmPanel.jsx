@@ -55,7 +55,7 @@ export default class ConfirmPanel extends React.Component {
             (flipped ? "black" : "lightgrey") :
             (flipped ? "white" : "grey");
 
-        const next = <div className="next-wrapper" onClick={this.onNextClick}>
+        const next = <div className="check-tab__timer-button" onClick={this.onNextClick}>
             <ReactMinimalPieChart
                 label={() => "Next"}
                 labelPosition={0}
@@ -78,9 +78,10 @@ export default class ConfirmPanel extends React.Component {
 
         if (mode === "write") {
 
-            return <div className="confirm">
-                <div className="bundle">
+            return <div className="check-tab__confirm-panel">
+                <div className="buttons-bundle">
                     <input
+                        className="check-tab__written-input"
                         type="text"
                         ref={this.inputRef}
                         autoFocus={true}
@@ -99,8 +100,8 @@ export default class ConfirmPanel extends React.Component {
             </div>;
         } else if (mode === "affirm") {
 
-            return <div className="confirm">
-                <div className="bundle">
+            return <div className="check-tab__confirm-panel">
+                <div className="buttons-bundle">
                     <Button
                         disabled={flipped}
                         onClick={() => this.onAnswer(true)}>

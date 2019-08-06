@@ -2,7 +2,6 @@ import React from "react";
 
 export default function Button(props) {
     let defStyle = {};
-    const defClassName = "button";
 
     const handleClick = () => {
         if (typeof props.onClick !== "function" ||
@@ -14,10 +13,10 @@ export default function Button(props) {
         children, disabled, active, attractive,
         style: propsStyle, className: propsClassName } = props;
 
-    let classes = [defClassName, propsClassName];
-    disabled && classes.push("disabled");
-    active && classes.push("active");
-    attractive && classes.push("attractive");
+    let classes = ["button", propsClassName];
+    disabled && classes.push("button_disabled");
+    active && classes.push("button_active");
+    attractive && classes.push("button_attractive");
     const className = classes.join(" ").trim();
 
     const style = Object.assign(defStyle, propsStyle);

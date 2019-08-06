@@ -75,7 +75,7 @@ export default class Tape extends React.Component {
 
     render() {
         return <ReactResizeDetector handleWidth onResize={this.onResize} >
-            <div className="cards">
+            <div className="check-tab__cards">
                 {
                     this.getCards()
                 }

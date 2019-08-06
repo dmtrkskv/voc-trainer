@@ -6,7 +6,7 @@ import { Context } from "./Context.jsx";
 export default function Empty(props) {
     return <Context.Consumer>
         {({ theme, beginSelection }) =>
-            <div className="empty">
+            <div className="app__empty">
                 It`s empty <br />
                 <Button onClick={beginSelection} attractive>Click</Button>
                 to add items

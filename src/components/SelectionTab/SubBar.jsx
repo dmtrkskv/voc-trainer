@@ -26,7 +26,7 @@ export default function SubBar(props) {
 
     const exit = <BackspaceArrowSVG onClick={resetMode} />;
 
-    if (mode === "random") return <div className="sub">
+    if (mode === "random") return <div className="bar__sub">
         <div style={{ fontSize: "15px", marginRight: 0 }}>{"10 random"}</div>
         <Button onClick={loadRandom}>
             <RefreshSVG />
@@ -34,7 +34,7 @@ export default function SubBar(props) {
         {exit}
     </div>
 
-    if (mode === "search") return <div className="sub">
+    if (mode === "search") return <div className="bar__sub">
         <Search search={loadSearched} />
         {exit}
     </div>;

@@ -13,11 +13,11 @@ export default class Result extends React.Component {
         const result = correctNum / totalCardsNum * 100;
         const label = Math.floor(result) + "%";
 
-        const {theme} = this.context;
+        const { theme } = this.context;
         const chartBg = theme === "day" ? "#efefef" : "#242424";
         const labelColor = theme === "day" ? "black" : "white";
 
-        return <div className="result">
+        return <div className="check-tab__result">
             <ReactMinimalPieChart
                 label={() => label}
                 labelPosition={0}

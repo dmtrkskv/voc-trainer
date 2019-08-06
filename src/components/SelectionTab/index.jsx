@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Bar from "./Bar.jsx";
 import SubBar from "./SubBar.jsx";
-import Content from "./Content.jsx";
+import Table from "./Table.jsx";
 import Pagination from "react-paginate";
 
 import { downloadPage } from '../../actions/downloadPage.js';
@@ -84,7 +84,7 @@ class WordsBox extends React.Component {
         const wordsNum = Object.keys(words).length;
 
         return (
-            <div id="words-box">
+            <div className="selection-tab">
 
                 <Bar
                     mode={mode} switchMode={this.switchMode} load={this.load}
@@ -98,7 +98,7 @@ class WordsBox extends React.Component {
                     />
                 </Bar>
 
-                <Content
+                <Table
                     isCheckBoxesOpened={isCheckBoxesOpened} activeParts={activeParts}
                     words={words} handleClickOnWord={this.props.selectWord}
                 />

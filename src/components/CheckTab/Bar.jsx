@@ -5,11 +5,11 @@ export default function Bar(props) {
     const { activeIndex, isActiveCardFlipped, inputMode } = props;
 
     return <div className="bar">
-        <div className="main">
+        <div className="bar__main">
             <Button
                 disabled={(activeIndex === 0 && !isActiveCardFlipped) || activeIndex === null}
                 onClick={props.reset}>Reset</Button>
-            <div className="bundle">
+            <div className="buttons-bundle">
                 <Button
                     active={inputMode === "write"}
                     onClick={() => props.switchInputMode("write")}>Write</Button>
