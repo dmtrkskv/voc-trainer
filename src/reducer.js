@@ -1,3 +1,7 @@
+const clone = function (obj) {
+    return JSON.parse(JSON.stringify(obj));
+}
+
 const initialState = {
     items: {},
     modifiedItems: {},
@@ -11,7 +15,11 @@ export default function reducer(state = initialState, action) {
     const { items, selected, selectionBuffer } = state;
 
     if (action.type === "UPDATE_ITEMS") {
-        return { ...state, items: action.payload.items, totalItems: action.payload.n };
+        return {
+            ...state,
+            items: action.payload.items,
+            totalItems: action.payload.totalItems
+        };
 
     } else if (action.type === "MODIFY_ITEMS") {
         let modifiedNewItems = {};

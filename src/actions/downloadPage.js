@@ -7,6 +7,6 @@ export const downloadPage = (page, num) => dispatch => {
     arr = arr.slice(start, start + num);
 
     const items = Object.fromEntries(arr);
-    dispatch({ type: "UPDATE_ITEMS", payload: { items: items, n: n } });
+    dispatch({ type: "UPDATE_ITEMS", payload: { items: items, totalItems: n } });
     dispatch({ type: "MODIFY_ITEMS" });
 }
