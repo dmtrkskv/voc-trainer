@@ -10,7 +10,7 @@ import CheckTab from "./CheckTab/index.jsx";
 
 import { Context } from "./Context.jsx";
 
-class App extends React.Component {
+export class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = { theme: "day" };

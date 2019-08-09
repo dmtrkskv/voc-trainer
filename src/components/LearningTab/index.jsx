@@ -8,7 +8,7 @@ import Content from "./Content.jsx";
 
 import { unselectWords } from "../../actions/unselectWords.js";
 
-class CardsBox extends React.PureComponent {
+export class LearningTab extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -199,4 +199,4 @@ export default connect(
     dispatch => ({
         removeCards: keys => dispatch(unselectWords(keys))
     })
-)(CardsBox);
+)(LearningTab);

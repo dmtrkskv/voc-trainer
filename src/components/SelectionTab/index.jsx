@@ -12,7 +12,7 @@ import { downloadSearched } from '../../actions/downloadSearched.js';
 import { completeSelection } from '../../actions/completeSelection.js';
 import { selectWord } from '../../actions/selectWord.js';
 
-class WordsBox extends React.Component {
+class SelectionTab extends React.Component {
     constructor(props) {
         super(props);
 
@@ -131,5 +131,5 @@ export default connect(
         completeSelection: save => dispatch(completeSelection(save)),
         selectWord: (key, word) => dispatch(selectWord(key, word))
     })
-)(WordsBox);
+)(SelectionTab);
 

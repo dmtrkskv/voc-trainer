@@ -8,7 +8,7 @@ import Tape from "./Tape.jsx";
 import ConfirmPanel from "./ConfirmPanel.jsx";
 import Button from "../Button.jsx";
 
-class TapeBox extends React.PureComponent {
+export class CheckTab extends React.PureComponent {
     constructor(props) {
         super(props);
 
@@ -156,4 +156,4 @@ class TapeBox extends React.PureComponent {
 
 export default connect(store => ({
     words: store.selected
-}))(TapeBox);
+}))(CheckTab);
